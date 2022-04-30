@@ -31,6 +31,9 @@ public class Student {
     @JoinTable(name = "Student_Course", joinColumns = @JoinColumn(name = "Student_ID"), inverseJoinColumns = @JoinColumn(name = "Course_ID"))
     private List<Course> courses = new ArrayList<>();
 
+    @Getter @Setter
+    private Address address;
+
     public void setCourse(Course course) {
         this.courses.add(course);
     }

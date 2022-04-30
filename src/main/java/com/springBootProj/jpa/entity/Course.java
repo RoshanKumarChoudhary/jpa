@@ -1,5 +1,6 @@
 package com.springBootProj.jpa.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,6 +15,7 @@ import java.util.List;
 
 @NoArgsConstructor
 @Entity
+@Cacheable
 @NamedQueries(value = {
         @NamedQuery(name = "query_find_all_course", query = "Select c From Course c"),
         @NamedQuery(name = "query_find_all_course_where_condn", query = "Select c from Course c where name Like '% 100 steps'")

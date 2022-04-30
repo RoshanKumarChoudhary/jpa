@@ -4,6 +4,7 @@ package com.springBootProj.jpa.repository;
 import com.springBootProj.jpa.entity.Course;
 import com.springBootProj.jpa.entity.Passport;
 import com.springBootProj.jpa.entity.Review;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -13,7 +14,7 @@ import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import java.util.List;
 
-
+@Slf4j
 @Repository
 @Transactional
 public class CourseRepository {
@@ -99,4 +100,20 @@ public class CourseRepository {
         }
 
     }
+
+    public void findStudentWithNoCourse() {
+       List<Course> courses =  entityManager.createQuery("select c from Course c where c.student is empty",Course.class).getResultList();
+       log.info("Courses with no student -> {}",courses);
+    }
+
+    public void findCoursesWithAtleastTwoStudent(){
+        List<Course> courses = entityManager.createQuery("Select c from Course c where size(c.student) > 2",Course.class).getResultList();
+        log.info("Courses with no student -> {}",courses);
+    }
+
+    public void findCourseWithStudentOrderBy(){
+        List<Course> courses = entityManager.createQuery("Select c from Course c order by size(c.student)", Course.class).getResultList();
+        log.info("Courses with Student order by -> {}", courses);
+    }
+    
 }
